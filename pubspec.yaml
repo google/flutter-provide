@@ -1,0 +1,13 @@
+name: provide
+environment:
+  sdk: '>=2.0.0 <3.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  test: ">=0.12.30+3"
+  mockito:
+  scoped_model:
