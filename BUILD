@@ -3,7 +3,7 @@ load("//mobile/flutter/build_defs:flutter.bzl", "flutter_test_suite")
 
 package(default_visibility = ["//visibility:public"])
 
-licenses(["notice"])  # MIT
+licenses(["notice"])  # BSD
 
 exports_files(["LICENSE"])
 
