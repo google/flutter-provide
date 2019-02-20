@@ -1,8 +1,13 @@
-# Copyright 2018 The Fuchsia Authors. All rights reserved.
-# Use of this source code is governed by a BSD-style license that can be
-# found in the LICENSE file.
-
 name: provide
+version: 1.0.0
+description: >
+  A simple framework for state management in Flutter. This package contains classes
+  to allow the passing of data down the widget tree.
+authors:
+- Eric Jia <ejia@google.com>
+- Fuchsia Authors
+homepage: https://github.com/google/flutter-provide
+
 environment:
   sdk: '>=2.0.0 <3.0.0'
 dependencies:
@@ -15,3 +20,4 @@ dev_dependencies:
   test: ">=0.12.30+3"
   mockito:
   scoped_model:
+

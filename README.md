@@ -1,28 +1,29 @@
 # Provide
 
 This package contains classes to allow the passing of data down the widget tree.
-It is designed as a replacement for ScopedModel that allows for more
+It is designed as a replacement for `ScopedModel` that allows for more
 flexible handling of data types and data.
 
 ## Key widgets and static methods
 
-  * `Provide<T>` - Widget used to obtain values from a ProviderNode higher up in 
-  the widget tree and rebuild on change. The Provide<T> widget should only be
-  used with Streams or Listenables. Equivalent to ScopedModelDescendant in
-  ScopedModel.
+  * `Provide<T>` - Widget used to obtain values from a `ProviderNode` higher up
+  in the widget tree and rebuild on change. The `Provide<T>` widget should
+  only be used with `Stream`s or `Listenable`s. Equivalent to
+  `ScopedModelDescendant` in `ScopedModel`.
 
-  * `Provide.value<T>` - Static method used to get a value from a ProviderNode
-  using the BuildContext. This will not rebuild on change. Similar to manually writing a static .of() method for an inherited widget.
+  * `Provide.value<T>` - Static method used to get a value from a `ProviderNode`
+  using the `BuildContext`. This will not rebuild on change. Similar to manually
+  writing a static `.of()` method for an `InheritedWidget`.
 
-  * `Provide.stream<T>` - Static method used to get a stream from a
-  ProviderNode. Only works if either T is listenable, or if the Provider comes
-  from a Stream.
+  * `Provide.stream<T>` - Static method used to get a `Stream` from a
+  `ProviderNode`. Only works if either `T` is listenable, or if the
+  `Provider` comes from a `Stream`.
 
   * `Provider<T>` - A class that returns a typed value on demand. Stored in
-  a ProviderNode to allow retrieval using Provide.
+  a `ProviderNode` to allow retrieval using `Provide`.
 
-  * `ProviderNode` - The equivalent of ScopedModel. Widget that contains
-  Providers which can be found as an InheritedWidget.
+  * `ProviderNode` - The equivalent of the `ScopedModel` widget. Contains
+  `Providers` which can be found as an `InheritedWidget`.
 
 ## Usage
 
@@ -32,8 +33,10 @@ This is a simple example of a counter app:
 
 /// A provide widget can rebuild on changes to any class that implements
 /// the listenable interface.
+///
 /// Here, we mixin ChangeNotifier so we don't need to manage listeners
 /// ourselves.
+///
 /// Extending ValueNotifier<int> would be another simple way to do this.
 class Counter with ChangeNotifier {
   int _value;
@@ -52,6 +55,7 @@ class Counter with ChangeNotifier {
 class CounterApp extends StatelessWidget {
   // The widgets here get the value of Counter in three different
   // ways.
+  //
   // - Provide<Counter> creates a widget that rebuilds on change
   // - Provide.value<Counter> obtains the value directly
   // - Provide.stream<Counter> returns a stream
@@ -63,6 +67,7 @@ class CounterApp extends StatelessWidget {
 
     return Column(children: [
       // Simplest way to retrieve the provided value.
+      //
       // Each time the counter changes, this will get rebuilt. This widget
       // requires the value to be a Listenable or a Stream. Otherwise
       Provide<Counter>(
@@ -78,7 +83,9 @@ class CounterApp extends StatelessWidget {
           builder: (context, snapshot) =>
               Text('Last even value: ${snapshot.data.value}')),
 
-      // 
+      // This button just needs to call a method on Counter. No need to rebuild
+      // it as the value of Counter changes. Therefore, we can use the value of
+      // `Provide.value<Counter>` from above.
       FlatButton(child: Text('increment'), onPressed: currentCounter.increment),
 
       Text('Another widget that does not depend on the Counter'),
@@ -89,39 +96,48 @@ class CounterApp extends StatelessWidget {
 void main() {
     // The class that contains all the providers. This shouldn't change after
     // being used.
+    //
     // In this case, the Counter gets instantiated the first time someone uses
     // it, and lives as a singleton after that.
     final providers = Providers()
       ..provide(Provider.function((context) => Counter(0)));
 
     runApp(ProviderNode(
-      child: CounterApp(),
       providers: providers,
+      child: CounterApp(),
     ));
 }
 
 ```
 
 ## How it works
-Similar to ScopedModel, this relies on InheritedWidgets in order to propagate
-data up and down the widget tree. However, unlike ScopedModel, rather than
-storing a single concrete type, a ProviderNode contains a map of Types to
-Providers. This means that a single node can contain any number of providers,
-and that a provider of a type doesn't have to be of the exact concrete type.
+Similar to `ScopedModel`, this relies on `InheritedWidget`s in order to
+propagate data up and down the widget tree. However, unlike `ScopedModel`,
+rather than storing a single concrete type, a `ProviderNode` contains a map of
+`Type`s to `Provider`s. This means that a single node can contain any number of
+providers, and that a provider of a type doesn't have to be of the exact
+concrete type.
 
-Somewhere in the tree, there is a ProviderNode, which contains a set of
-Providers. When a Provide widget is created, it gets searches up the widget tree
-for a ProviderNode that contains a provider for it's requested type. It then
+Somewhere in the tree, there is a `ProviderNode`, which contains a set of
+`Provider`s. When a `Provide` widget is created, it searches up the widget tree
+for a `ProviderNode` that contains a provider for its requested type. It then
 listens for any changes to that requested type.
 
-There are also static methods that operate on BuildContext that allow any
-widget's build function to get data from ProviderNodes without listening to
+There are also static methods that operate on `BuildContext` that allow any
+widget's build function to get data from `ProviderNode`s without listening to
 changes directly.
 
 
 ## Useful widgets to use with Provider
-* [ChangeNotifier](https://docs.flutter.io/flutter/foundation/ChangeNotifier-class.html)- Easy way to implement Listenable.
+* [ChangeNotifier](https://docs.flutter.io/flutter/foundation/ChangeNotifier-class.html)
+  — Easy way to implement Listenable. The equivalent of `Model` from
+  `ScopedModel`.
 
-* [ValueNotifier](https://docs.flutter.io/flutter/foundation/ValueNotifier-class.html) - Wrapping your mutable state in ValueNotifier\<T> can save you from missing notifyListener calls.
+* [ValueNotifier](https://docs.flutter.io/flutter/foundation/ValueNotifier-class.html)
+  — Wrapping your mutable state in `ValueNotifier<T>` can save you from
+  missing `notifyListener` calls.
 
-* [StreamBuilder](https://docs.flutter.io/flutter/widgets/StreamBuilder-class.html) - Can be used with Provide.Stream to have widgets that rebuild on stream changes.
+* [StreamBuilder](https://docs.flutter.io/flutter/widgets/StreamBuilder-class.html)
+  — Can be used with `Provide.stream` to have widgets that rebuild on
+  stream changes.
+
