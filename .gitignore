@@ -1,0 +1,15 @@
+.atom/
+.idea/
+
+# dart
+.packages
+.pub
+packages
+pubspec.lock
+
+# flutter
+build/
+
+# docs
+dartdoc-viewer/
+
