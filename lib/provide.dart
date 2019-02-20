@@ -217,7 +217,8 @@ abstract class Provider<T> {
   /// received value of the stream.
   ///
   /// This provider notifies for rebuild after every release.
-  factory Provider.stream(Stream<T> stream) => _StreamProvider<T>(stream);
+  factory Provider.stream(Stream<T> stream, {T initialValue}) =>
+      _StreamProvider<T>(stream, initialValue: initialValue);
 }
 
 /// Base mixin for providers.
@@ -527,8 +528,9 @@ class _StreamProvider<T> extends ChangeNotifier with TypedProvider<T> {
   StreamSubscription _listener;
 
   /// Immediately starts listening to the stream and caching values.
-  _StreamProvider(Stream<T> stream)
-      : _stream = stream.isBroadcast ? stream : stream.asBroadcastStream() {
+  _StreamProvider(Stream<T> stream, {T initialValue})
+      : _lastValue = initialValue,
+        _stream = stream.isBroadcast ? stream : stream.asBroadcastStream() {
     _listener = _stream.listen((data) {
       if (_lastValue != data) {
         _lastValue = data;

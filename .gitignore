@@ -9,6 +9,8 @@ pubspec.lock
 
 # flutter
 build/
+android/
+ios/
 
 # docs
 dartdoc-viewer/

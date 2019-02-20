@@ -186,6 +186,24 @@ void main() {
               expectedString: 'valueNotifier')));
     });
 
+    testWidgets('can get initial value from stream', (tester) async {
+      final broadcastController = StreamController<int>.broadcast();
+      final providers = Providers()
+        ..provide(Provider.stream(broadcastController.stream, initialValue: 3));
+      var buildCalled = false;
+
+      final widget = ProviderNode(
+          providers: providers,
+          child: CallbackWidget((context) {
+            buildCalled = true;
+            expect(Provide.value<int>(context), 3);
+          }));
+
+      await tester.pumpWidget(widget);
+      expect(buildCalled, isTrue);
+      await broadcastController.close();
+    });
+
     testWidgets('can get streams', (tester) async {
       var buildCalled = false;
 
