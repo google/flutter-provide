@@ -14,6 +14,7 @@ before_script:
   - ./flutter/bin/flutter doctor
 script:
   - ./flutter/bin/flutter test
+  - cd example && ../flutter/bin/flutter test
 cache:
   directories:
     - $HOME/.pub-cache

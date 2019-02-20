@@ -1,0 +1,15 @@
+name: example
+description: Demonstrates how to use package:provide.
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provide:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
