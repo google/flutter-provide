@@ -1,5 +1,3 @@
-# Provide
-
 This package contains classes to allow the passing of data down the widget tree.
 It is designed as a replacement for `ScopedModel` that allows for more
 flexible handling of data types and data.
