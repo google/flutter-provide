@@ -1,5 +1,5 @@
 name: provide
-version: 1.0.1
+version: 1.0.2
 description: >
   A simple framework for state management in Flutter. This package contains classes
   to allow the passing of data down the widget tree.

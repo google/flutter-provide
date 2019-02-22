@@ -1,3 +1,16 @@
+**NOTE 2019-02-21:** There's a discussion in the Flutter community over the difference between this
+package, `package:provider`, and `package:scoped_model`. There is a possibility that (some)
+of these efforts will merge. Learn more in issue
+[#3](https://github.com/google/flutter-provide/issues/3).
+
+If you must choose a package today, it's safer to go with `package:scoped_model` than with this
+package.
+
+Watch the issue above or follow [Flutter's Twitter account](https://twitter.com/flutterio)
+for updates.
+
+---
+
 This package contains classes to allow the passing of data down the widget tree.
 It is designed as a replacement for `ScopedModel` that allows for more
 flexible handling of data types and data.
