@@ -6,7 +6,7 @@ of these efforts will merge. Learn more in issue
 If you must choose a package today, it's safer to go with `package:scoped_model` than with this
 package.
 
-Watch the issue above or follow [Flutter's Twitter account](https://twitter.com/flutterio)
+Watch the issue above or follow [Flutter's Twitter account](https://twitter.com/FlutterDev)
 for updates.
 
 ---
