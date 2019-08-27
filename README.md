@@ -1,13 +1,18 @@
-**NOTE 2019-02-21:** There's a discussion in the Flutter community over the difference between this
-package, `package:provider`, and `package:scoped_model`. There is a possibility that (some)
-of these efforts will merge. Learn more in issue
-[#3](https://github.com/google/flutter-provide/issues/3).
+**DEPRECATION NOTE:** 
+After discussion in the Flutter community over the difference between this
+package, `package:provider`, and `package:scoped_model` (all with a similar,
+InheritedWidget-based philosophy), we have decided to merge these efforts.
 
-If you must choose a package today, it's safer to go with `package:scoped_model` than with this
-package.
+The community-initiated `provider` supersedes this package, `provide`. Get `provider`
+[here](https://pub.dev/packages/provider).
 
-Watch the issue above or follow [Flutter's Twitter account](https://twitter.com/flutterio)
-for updates.
+To be clear, this package will always be available at
+[pub.dev/packages/provide](https://pub.dev/packages/provide) — pub doesn't allow
+packages to "disappear". But the package likely won't be upgraded.
+
+See [Issue #3](https://github.com/google/flutter-provide/issues/3) for the full
+discussion.
+
 
 ---
 
