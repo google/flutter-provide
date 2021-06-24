@@ -567,7 +567,7 @@ class _InheritedProviders extends InheritedWidget {
 
   /// Finds the closest _InheritedProviders widget abocve the current widget.
   static _InheritedProviders of(BuildContext context) {
-    final widget = context.inheritFromWidgetOfExactType(_InheritedProviders);
+    final widget = context.dependOnInheritedWidgetOfExactType<_InheritedProviders>();
     return widget is _InheritedProviders ? widget : null;
   }
 
